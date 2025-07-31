@@ -11,4 +11,6 @@ Indicative Experiments:
 9. Develop MATLAB code for PDE:Liebmann's method.
 10. Develop Aspen Plus simulation/ MS Excel package to optimize a chemical process involving PDE.
 
-if this repo gains popularity, I will attempt other faculties' questions for CMC. 
+if this repo gains popularity, I will attempt other faculties' questions for CMC.
+
+https://github.com/dhee-b06/matlab-codes-for-cmc
