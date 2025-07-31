@@ -1,0 +1,34 @@
+% NEWTON-RAPHSON METHOD 
+syms t
+f(t) = 70*exp(-1.5*t) + 25*exp(-0.075*t) - 9;
+fd(t) = diff(f, t);
+es = 0.0001;
+x(1) = 5;
+
+for i = 1:500
+    r = double(f(x(i))) / double(fd(x(i)));
+    x(i+1) = x(i) - r;
+    ea = abs((x(i+1) - x(i))/x(i+1)) * 100;
+    iter(i) = i;
+    xval(i) = x(i);
+    fval(i) = double(f(x(i)));
+    fdval(i) = double(fd(x(i)));
+    err(i) = ea;
+    if ea <= es
+        a = x(i+1);
+        break
+    end
+end
+
+% Create the table
+T = table(iter.', xval.', fval.', fdval.', err.', ...
+    'VariableNames', {'Iteration', 'x', 'f(x)', 'f"(x)', 'Error_percent'});
+disp(T)
+
+% Plot error vs iteration
+figure; 
+plot(iter, err, '*r');
+
+%conclusion
+fprintf('\nTime required for the bacteria concentration in the lake to be 9 is %.6f s. THE RESULT IS OBTAINED AFTER %d ITERATIONS.\n', a, i);
+whos
