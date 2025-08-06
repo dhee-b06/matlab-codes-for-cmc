@@ -1,0 +1,33 @@
+% GAUSS-JORDAN METHOD
+function x = gj(xyz, const)
+    % Combine A and b to form the augmented matrix
+    aug = [xyz const];
+    [n, m] = size(aug);
+
+    for i = 1:n
+        % Make the diagonal element 1 (divide the whole row)
+        aug(i,:) = aug(i,:) / aug(i,i);
+
+        % Make the other entries in the current column
+        for j = 1:n
+            if j ~= i
+                aug(j,:) = aug(j,:) - aug(j,i) * aug(i,:);
+            end
+        end
+    end
+
+    % The solution x is the last column
+    x = aug(:, end);
+end
+whos 
+
+%-----------------------------------
+
+% Example system:
+% x + 2y + 3z = 9
+% 2x + 3y + 7z = 24
+% 3x + 3y + 4z = 19
+
+xyz = [1 2 3; 2 3 7; 3 3 4];
+const = [9; 24; 19];
+gj(xyz, const)
