@@ -33,3 +33,4 @@ xlabel('Iteration')
 ylabel('Absolute Error (%)')
 title('Convergence of Newton''s Method for Drag Coefficient')
 grid on
+fprintf('\n The obtained drag coefficient is %f kg/s. The result is obtained after %f iterations \n',c(ex),(i-1));
