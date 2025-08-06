@@ -1,0 +1,44 @@
+% clear command window and previous data
+clc
+clear
+syms c
+% symbolic Function Implimentation
+f(c) = ((9.81*65/c)*(1 - exp(-c*10/65)) - 40);
+% Preloop Allocations
+iteration = 1;
+newdata = [0 0 0];
+x0 = 12;
+x1 = 13;
+et = 0.0001;
+
+digits(15) % Sets digit Precision
+while(1)
+    % Secant Method Implimentation
+    xm = x1 - double(f(x1))*(x1 - x0)/double(f(x1) - f(x0));
+    % Error Calculation
+    abserror = abs(xm - x1)/x1*100;
+    
+    % data collection (for display)
+    data = [iteration vpa(xm) vpa(abserror)];
+    newdata = [newdata;data]; %#ok<*AGROW>
+    
+    % Incremeant and Value Updation
+    x0 = x1;
+    x1 = xm;
+    iteration = iteration + 1;
+
+    % Break Condition
+    if abserror <= et || double(f(xm)) == 0 || iteration > 50
+        break
+    end
+end
+
+% Table Display
+T = array2table(newdata(2:end,:),'VariableNames',{'Iterations','New Root xm' ...
+    ,'Absolute Error%'})
+
+disp("The obtained drag coefficient is " + string(newdata(end,2)) + "kg/s." + ...
+    " The result is obtained after " + string(newdata(end,1)) + "th Iteration")
+
+% Iteration-Error Plot
+plot(newdata(2:end,1),newdata(2:end,3),"-x")
