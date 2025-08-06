@@ -1,0 +1,14 @@
+THE USE OF VPA() FUNCTION:
+vpa() converts the value to a symbol it can be used with the digits() function to control the number of precision bits 
+  if vpa() is omitted the last few iterations are rounded off when printed with disp() / fprintf() as they are considered as a double() 
+    which MATLAB rounds off so displayed values are not upto sufficient precision especially if more than 6 decimal precision is required
+
+But symbols can have more precision than a double. 
+      Ex: digits(100) vpa(pi) gives pi upto 100 digits but is a symbol so arithmetic handeling becomes difficult. 
+It sacrifices ease of use for precision.
+
+However vpa() must not be outside the "data" matrix as it causes looped variables to be converted to a symbol and calcution is presented as a
+real number like p/q where p and q are some absurd decimal values ex: 412333149201/23120301239 
+  this happens because MATLAB considers both the numerator and denominator as a symbol 
+    so it is best to avoid lines like x = vpa(b) 
+     where x is in a loop or is used for further calculation

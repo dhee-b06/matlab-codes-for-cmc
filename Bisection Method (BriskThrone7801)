@@ -1,0 +1,95 @@
+% Clear previous data
+clc
+clear
+syms c
+
+
+% Symbolic Function f(c) with relevant input parameters (wt,speed,etc.) 
+f(c) = ((9.81*68/c)*(1 - exp(-c*10/68)) - 40);
+
+% Initial Variable Decleration
+xa = 12;
+xb = 16;
+et = 0.0001;
+iteration = 0;
+
+% Pre looping conditions
+xr = xa;
+newdata = [0 0 0];
+
+digits(20) % sets the precision for display calculation not affected
+
+while(true)
+    
+    % New root
+    xrold = xr;
+    xr = (xa + xb)/2;
+
+    % Incremeant of iteration
+    iteration = iteration + 1;
+    
+    % Error Calculation if f(xr) is not equal to 0
+    if f(xr) ~= 0
+        ea = abs((xrold - xr)/xr*100);
+    end
+    
+    % Data Dynamically Grows with each iteration adding new values in the next row first row is 0 0 0 given by newdata in the preloop criteria 
+    % this stores the data in an NxN matrix with the first row being all 0's
+    data = [iteration vpa(xr) vpa(ea)]; 
+    newdata = [newdata;data];
+    % The use of vpa() function is explained at the end of the document
+    
+    % test case to update the bisection bounds
+    test = f(xa)*f(xr);
+    if test < 0
+        xb = xr;
+    elseif test > 0 
+        xa = xr;
+    else
+        ea = 0;
+    end
+    
+    % Tolerance Condition 
+    if ea <= et
+        break
+    end
+
+    % Iteration limit isn't required since bisection method garantees a
+    % root
+end
+
+% The newdata matrix is converted to a table excluding the first row
+T = array2table(newdata(2:end,:),'VariableNames',{'Iterations', ...
+    'New Root','Error Percentage'}) %#ok<*NOPTS> 
+
+disp("The value of the drag coefficient is " + string(newdata(end,2)) ...
+    + " kg/s. The result is obtained after " + string(newdata(end,1)) + ...
+    "th Iteration")
+
+
+% Plotting the graph and the x axis at 19th iteration the points 
+% After zooming into the neighbourhood of 10^-7 the graphical values comes
+% to around ~14.7794015 assuming that as true value the true error is
+% around ~(3.7 x 10^-5)%
+g(c) = c*0;D
+X = 12:0.001:16;
+plot(X,f(X),X,g(X))
+
+
+
+% THE USE OF VPA() FUNCTION:
+
+% vpa() converts the value to a symbol it can be used with the digits()
+% function to control the number of precision bits if vpa() is omitted the last
+% few iterations are rounded off to 14.7794 when printed with disp() /
+% fprintf() as they are considered as a double() which MATLAB rounds off to
+% 14.7794 but symbols can have more precision than a double. Ex:
+% digits(100) vpa(pi) gives pi upto 100 digits but is a symbol so
+% arithmetic handeling becomes difficult. It sacrifices ease of use for
+% precision.
+
+% however vpa() must not be outside the "data" matrix as it causes xr, xa
+% and xb to be converted to a symbol and calcution is presented as a
+% real number like p/q where p and q are some absurd decimal values ex:
+% 412333149201/23120301239 as MATLAB considers both the numerator and
+% denominator as a symbol
