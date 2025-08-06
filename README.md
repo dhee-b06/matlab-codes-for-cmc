@@ -2,7 +2,7 @@
 Indicative Experiments:
 1. Develop MATLAB code for bisection / Regula falsi method. DONE
 2. Develop MATLAB code for Newton Raphson / Secant method. DONE
-3. Develop MATLAB code for Gauss Elimination / Gauss Jordan method.
+3. Develop MATLAB code for Gauss Elimination / Gauss Jordan method. DONE
 4. Develop MATLAB code for Gauss Jacobi / Gauss Seidel method.
 5. Develop Aspen Plus simulation for solving simultaneous equations in distillation column.
 6. Develop MATLAB code for Numerical Integration
