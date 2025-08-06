@@ -14,3 +14,5 @@ Indicative Experiments:
 if this repo gains popularity, I will attempt other faculties' questions for CMC.
 
 https://github.com/dhee-b06/matlab-codes-for-cmc
+
+Authors- Dhee-b06 & BriskThrone7801
