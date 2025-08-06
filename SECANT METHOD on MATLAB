@@ -1,0 +1,35 @@
+% SECANT METHOD
+f = @(c)((9.81*65)/c)*(1-exp((-10*c)/65))-40;
+es = 0.0001; 
+c(1) = 12;
+c(2) = 13;
+
+it = [];
+root = [];
+err = [];
+
+for i = 2:500
+    c(i+1) = c(i) - (f(c(i)) * (c(i)-c(i-1))) / (f(c(i)) - f(c(i-1)));
+    ea = abs((c(i+1) - c(i)) / c(i+1)) * 100;
+    it(end+1) = i-1; 
+    root(end+1) = c(i);
+    err(end+1) = ea;
+    if ea <= es
+        ex = i;
+        break
+    end
+end
+
+T = table(it.', root.', err.', ...
+    'VariableNames', {'Iteration', 'New Root', 'Absolute Error'});
+disp(T);
+
+
+plot(it, err, '-o')
+hold on
+plot(c(ex), 0, '*r')
+hold off
+xlabel('Iteration')
+ylabel('Absolute Error (%)')
+title('Convergence of Newton''s Method for Drag Coefficient')
+grid on
