@@ -1,0 +1,38 @@
+EXP 5
+% DB
+
+
+function x = GEL(xyz, const)
+    n = length(const);
+    x = zeros(n, 1);     
+    aug = [xyz, const];
+    disp('Initial augmented matrix:');
+    disp(aug);
+    
+    max_iter = 1000;
+    tol = 1e-8;
+    for iter = 1:max_iter
+        x_old = x;
+        for i = 1:n
+            sum1 = xyz(i,1:i-1) * x(1:i-1);
+            sum2 = xyz(i,i+1:n) * x_old(i+1:n);
+            x(i) = (const(i) - sum1 - sum2) / xyz(i, i);
+        end
+        
+        aug = [xyz, const];
+        disp(['After iteration ', num2str(iter), ': ']);
+        disp(aug);
+    
+        if norm(x - x_old) < tol
+            break;
+        end
+    end
+end
+
+xyz = [52 20 25; 30 50 20; 25 20 55];
+const = [4800; 5810; 5690];
+v = GEL(xyz, const);
+fprintf('%.8f m^3 of sand is hauled from each pit.\n', v(1));
+fprintf('%.8f m^3 of fine gravel is hauled from each pit.\n', v(2));
+fprintf('%.8f m^3 of coarse gravel is hauled from each pit.\n', v(3));
+
