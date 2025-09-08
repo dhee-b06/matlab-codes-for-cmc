@@ -1,0 +1,55 @@
+WARNING- this is a self made solution and I was not present in the class when this thing was taught in the lab. So I request you to copy it at 
+you own personal risk.
+Please check for errors in the code. I would be happy to edit it out definitely 
+EXP6
+
+% DB 
+
+
+function [c_max, growth_max, iterations] = golden_section_search_growth
+    % Define growth function
+    growth = @(c) (2*c) ./ (4 + 0.8*c + c.^2 + 0.2*c.^3);
+    
+    % Golden-section search algorithm
+    xl = 0;
+    xu = 5;
+    phi = (1 + sqrt(5))/2;
+    rp = 2 - phi;
+    tol = 1e-5;
+    max_iter = 1000;
+    
+    x1 = xl + rp*(xu-xl);
+    x2 = xu - rp*(xu-xl);
+    f1 = growth(x1);
+    f2 = growth(x2);
+    iterations = 0;
+    
+    while (xu-xl > tol) && (iterations < max_iter)
+        iterations = iterations + 1;
+        if f1 > f2
+            xu = x2;
+            x2 = x1;
+            f2 = f1;
+            x1 = xl + rp*(xu-xl);
+            f1 = growth(x1);
+        else
+            xl = x1;
+            x1 = x2;
+            f1 = f2;
+            x2 = xu - rp*(xu-xl);
+            f2 = growth(x2);
+        end
+    end
+    
+    if f1 > f2
+        c_max = x1;
+        growth_max = f1;
+    else
+        c_max = x2;
+        growth_max = f2;
+    end
+    
+    % Print in required format
+    fprintf('The maximum bacterial growth is found to be %f at the food concentration of %f. Number of iterations involved %d.\n', growth_max, c_max, iterations);
+end
+whos
