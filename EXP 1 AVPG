@@ -1,0 +1,93 @@
+EXP 1 
+
+
+% SOLUTION USING BISECTION METHOD
+
+f=@(x) ((9.81*68/x)*(1-exp(-(x/68)*10))-40);
+x1=12; 
+xn= 16; 
+es= 0.0001; 
+n=0; 
+
+xr=x1; 
+while (1) 
+    xrold= xr; 
+    xr= (x1+xn)/2; 
+    n=n+1; 
+    if xr~=0
+        ea=abs((xr-xrold)/xr)*100; 
+    end 
+    test= f(x1)*f(xr); 
+    if test<0
+       xn=xr; 
+    elseif test>0
+       x1=xr; 
+    else
+       ea=0; 
+    end 
+    if ea<=es 
+       break 
+    end
+end 
+% GRAPH
+c_values = linspace(-20, 20, 50);
+f_c_values = (9.81*68./c_values).*(1-exp(-(c_values/68)*10))-40; 
+figure; 
+plot(c_values,f_c_values, 'b-', 'LineWidth', 1.5);
+grid on;
+xlabel('c');
+ylabel('f(c)');
+title('Plot of c vs. f(c)');
+hold on 
+% the point needed for zero
+plot(xr,0,'r*')  
+hold off
+
+fprintf('The drag coefficient is %.8f kg/s. The result is obtained after %d iterations',xr, n);
+
+%TABLE FOR EACH ITERATION
+
+x1 = 12;
+xn = 16;
+es = 0.0001;
+n = 0;
+xr = x1;
+ea = inf;            
+
+format short         
+
+while true
+    n = n + 1;
+    xrold = xr;
+    xr = (x1 + xn)/2;
+    
+    if xr ~= 0
+        ea = abs((xr - xrold) / xr) * 100;
+    end
+    
+    test = f(x1) * f(xr);
+    
+    if test < 0
+        xn = xr;
+    elseif test > 0
+        x1 = xr;
+    else
+        ea = 0;
+    end
+    
+    iteration(n) = n;
+    x1_arr(n) = x1;
+    xn_arr(n) = xn;
+    xr_arr(n) = xr;
+    ea_arr(n) = ea;
+    
+
+    if ea <= es
+        break;
+    end
+end
+
+T = table(iteration', x1_arr', xn_arr', xr_arr', ea_arr', ...
+    'VariableNames', {'Iteration', 'x1', 'xn', 'xr', 'Error percentage'});
+disp(T);
+whos
