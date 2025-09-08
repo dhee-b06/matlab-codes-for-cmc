@@ -1,0 +1,42 @@
+EXP 4
+% DB
+
+
+function x= GEL (xyz, const)
+    n = length(const);
+    augmented = [xyz, const];    % combine into augmented matrix
+
+    disp('Initial augmented matrix:');
+    disp(augmented);
+
+    for k = 1:n-1
+        for i = k+1:n
+            c = xyz(i,k) / xyz(k,k);
+            xyz(i,k:n) = xyz(i,k:n) - c * xyz(k,k:n);
+            const(i) = const(i) - c * const(k);
+
+            augmented = [xyz, const];
+            disp(['After eliminating {R', num2str(i), ', C', num2str(k), '};']);
+            disp(augmented);
+        end
+    end
+
+    x = zeros(n,1);
+    x(n) = const(n) / xyz(n,n);
+
+    for i = n-1:-1:1
+        ax = 0;
+        for j = i+1:n
+            ax = ax + xyz(i,j) * x(j);
+        end
+        x(i) = (const(i) - ax) / xyz(i,i);
+    end
+end
+xyz = [52 20 25; 30 50 20; 25 20 55];
+const = [4800; 5810; 5690];
+v=GEL(xyz, const)
+fprintf('%.8f m^3 of sand is hauled from each pit.\n', v(1));
+fprintf('%.8f m^3 of fine gravel is hauled from each pit.\n', v(2));
+fprintf('%.8f m^3 of coarse gravel is hauled from each pit.\n', v(3));
+whos
+
