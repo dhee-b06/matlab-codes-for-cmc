@@ -1,0 +1,47 @@
+EXP 2 
+% BY BRISK THRONE
+% Newton-Rhapson Method
+clc
+clear
+syms t
+% Symbolic Function Implementation
+C(t) = 70*exp(-1.5*t) + 25*exp(-0.075*t) - 9;
+
+% Preloop Decleration
+Tolerence = 0.0001;
+xnew = 0;
+xold = 5;
+derivative(t) = diff(C,t);
+iteration = 1;
+newdata = [0 0 0 0 0];
+
+digits(10) % Sets data precision 
+while(1)
+    % Newton-Rhapson formula
+    xnew = xold - (double(C(xold))/double(derivative(xold)));   
+    % Error Calculation
+    relerror = abs(xnew - xold)/xnew*100;
+    
+    % Data collection 
+    data = [iteration vpa(xold) vpa(C(xold)) vpa(derivative(xold)) vpa(relerror)];
+    newdata = [newdata;data];
+    
+    % Incremeant and updating
+    xold = xnew;
+    iteration = iteration + 1;
+    
+    % Break condition (includes Divergence condition - iteration limit)
+    if relerror <= Tolerence || C(xnew) == 0 || iteration > 100
+        break
+    end
+end
+
+T = array2table(newdata(2:end,:),'VariableNames',{'Iterations','New Root', ...
+    'f(t)','fdash(t)','Absolute Error'})
+
+disp("Time Required for Bacteria Concentration in the lake to be 9 is " + ...
+    string(newdata(end,2)) + ". The result is obtained after " + ...
+    string(newdata(end,1)) + "th Iteration.")
+
+% Iteration-Error Graph
+plot(newdata(2:end,1),newdata(2:end,5))
