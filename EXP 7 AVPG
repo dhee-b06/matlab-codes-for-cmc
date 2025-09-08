@@ -1,3 +1,10 @@
+WARNING- this is a self made solution and I was not present in the class when this thing was taught in the lab. So I request you to copy it at 
+you own personal risk.
+Please check for errors in the code. I would be happy to edit it out definitely. 
+EXP7
+
+% DB 
+
 
 
 t = [0 10 20 30 40 50 60];      
@@ -67,3 +74,5 @@ fprintf(' The area under the curve is %.8f and the mass leaving the reactor is %
 fprintf(' The area under the curve is %.8f and the mass leaving the reactor is %.8f (by Simpson''s 1/3rd rule).\n', a13, m2);
 fprintf(' The area under the curve is %.8f and the mass leaving the reactor is %.8f (by Simpson''s 3/8th rule).\n', a38, m3);
 fprintf(' The area under the curve is %.8f and the mass leaving the reactor is %.8f (by Graphical Procedure).\n', ar, mg);
+whos 
+
