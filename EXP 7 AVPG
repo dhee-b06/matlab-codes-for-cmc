@@ -1,0 +1,69 @@
+
+
+t = [0 10 20 30 40 50 60];      
+c = [10 35 55 52 37 34 30];     
+q = 4;                          
+
+% Trapezoidal rule. Trapz is a predefined function in matlab that gives the
+% solution through the trapezoidal integration rule
+a = trapz(t, c);
+m1 = q * a;
+
+% Simpson's 1/3 Rule (needs even number of intervals)
+if mod(length(t)-1,2) == 0
+    h = t(2) - t(1);      % Step size
+    b = c(1) + c(end);    % First and last function value
+    for i = 2:2:length(c)-1
+        b = b + 4 * c(i); % Add 4 * every odd-indexed value
+    end
+    for i = 3:2:length(c)-2
+        b = b + 2 * c(i); % Add 2 * every even-indexed value
+    end
+    a13 = h/3 * b;        % Multiply by h/3 as per formula
+    m2 = q * a13;         % for area calculation
+else
+    a13 = NaN;            % If intervals are odd, return NaN
+    m2 = NaN;
+end
+
+% Simpson's 3/8 Rule (needs number of intervals to be multiple of 3)
+if mod(length(t)-1,3) == 0
+    h = t(2) - t(1);         % Step size
+    b = c(1) + c(end);       % Add first and last function values
+    for i = 2:3:length(c)-1
+        b = b + 3 * c(i);    % Add 3* every point not a multiple of 3, starting from idx 2
+    end
+    for i = 3:3:length(c)-1
+        b = b + 3 * c(i);    % Add 3* every point not a multiple of 3, starting from idx 3
+    end
+    for i = 4:3:length(c)-3
+        b = b + 2 * c(i);    % Add 2* every point that IS a multiple of 3, starting from idx 4
+    end
+    a38 = 3*h/8 * b;         % Apply the Simpson's 3/8 rule formula
+    m3 = q * a38;            % area calculation
+else
+    a38 = NaN;               % If number of intervals is not a multiple of 3, return NaN
+    m3 = NaN;
+end
+
+% Graphical method (using a normal graph to calculate results) 
+figure;                              
+plot(t, c, '-o', 'LineWidth',1.5,'MarkerSize',6);
+xlabel('Time (min)');                 
+ylabel('Concentration (mg/m^3)');   
+title('Graphical Procedure');       
+grid on;                            
+ar = 0;                               % Initialize value
+for i = 1:length(t)-1                 % Loop over each time interval
+    h = t(i+1) - t(i);               
+    rar = (c(i) + c(i+1)) * h / 2;  % area calculation using formula
+    ar = rar;                  
+end
+
+mg = q * ar;                          % Multiply total area by q (e.g., flow rate)
+
+% Output as required
+fprintf(' The area under the curve is %.8f and the mass leaving the reactor is %.8f (by Trapezoidal rule).\n', a, m1);
+fprintf(' The area under the curve is %.8f and the mass leaving the reactor is %.8f (by Simpson''s 1/3rd rule).\n', a13, m2);
+fprintf(' The area under the curve is %.8f and the mass leaving the reactor is %.8f (by Simpson''s 3/8th rule).\n', a38, m3);
+fprintf(' The area under the curve is %.8f and the mass leaving the reactor is %.8f (by Graphical Procedure).\n', ar, mg);
