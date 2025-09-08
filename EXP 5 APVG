@@ -35,4 +35,4 @@ v = GEL(xyz, const);
 fprintf('%.8f m^3 of sand is hauled from each pit.\n', v(1));
 fprintf('%.8f m^3 of fine gravel is hauled from each pit.\n', v(2));
 fprintf('%.8f m^3 of coarse gravel is hauled from each pit.\n', v(3));
-
+whos
