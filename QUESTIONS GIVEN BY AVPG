@@ -1,1 +1,211 @@
 ALL THE PROBLEM STATEMENTS GIVEN BY AVPG WILL BE THERE. THE ONES FOR MP IS NOT GIVEN.
+
+EXP 1 
+Experiment 1: Problem Statement: 
+The velocity “v” of a falling parachutist is given by
+
+V= G*M/C * (1- exp (-(C/M)*T)
+
+Where, acceleration due to gravity, g = 9.81 m/s^2, 
+mass of the man, m = 68 kg, 
+velocity, v = 40 m/s and t = 10 s.
+
+Write a MATLAB code to determine the drag coefficient, c in kg/s of 
+the parachutist assuming the air resistance is linearly proportional to the velocity. 
+
+Stopping criterion εs = 0.0001%. 
+Plot a graph [c vs. f(c)] and compare the graphical and numerical 
+solution.
+
+The output must be in the following format
+1. Iteration New root, xm Absolute error εa
+2. The drag coefficient is ______________ kg/s. The result is obtained after “n” th 
+iteration. 
+
+
+
+EXP 2
+Experiment 2: Problem Statement: 
+The concentration of pollutant bacteria 'C' in a lake decreases as per the model
+
+C= 70*exp(-1.5*t)+ 25*exp(-0.075*t) 
+
+where 't' is the time variable. 
+Determine the time required for the bacteria concentration to be 
+reduced to 9. 
+Specified error εs = 0.0001%.
+Initial guess = 5.
+The output must be in the following format
+
+1. Iteration New root, xm f(x) f’(x) Absolute error εa
+2. Time required for the bacteria concentration in the lake to be 9 is __________. The result is obtained after “n”th iteration.
+Submit the lab report before the next lab session in the prescribed format. 
+
+
+EXP 3
+Experiment 3: Problem Statement: 
+The velocity “v” of a falling parachutist is given by
+
+V= G*M/C * (1- exp (-(C/M)*T)
+
+Where, acceleration due to gravity, g = 9.81 m/s^2, 
+mass of the man, m = 68 kg, 
+velocity, v = 40 m/s and t = 10 s.
+
+Write a MATLAB code to determine the drag coefficient, c in kg/s of 
+the parachutist assuming the air resistance is linearly proportional to the velocity. 
+
+Stopping criterion εs = 0.0001%. 
+Plot a graph [c vs. f(c)] and compare the graphical and numerical 
+solution using SECANT method.
+
+The output must be in the following format
+1. Iteration New root, xm Absolute error εa
+2. The drag coefficient is ______________ kg/s. The result is obtained after “n” th 
+iteration. 
+
+
+EXP 4
+Experiment 4: Problem Statement: 
+A civil engineer involved in construction requires 4800, 5810 and 5690 m3
+of sand, fine gravel, and coarse gravel, respectively, for a building project. There are three pits from which 
+these materials can be obtained. The composition of these pits is given below.
+      Sand % Fine Gravel % Coarse Gravel %
+Pit 1 52           30            18
+Pit 2 20           50            30
+Pit 3 25           20            55
+Develop a Gauss Elimination MATLAB code to determine the cubic meters of sand, 
+fine gravel and coarse gravel that must be hauled from each pit in order to meet the engineer’s needs.
+
+The output must be in the following format
+1. Print each forward elimination step (in Augmented Matrix form)
+2. Print Result. ie. 
+______________ m^3 of sand is hauled from each pit.
+______________ m^3 of fine gravel is hauled from each pit.
+______________ m^3 of coarse gravel is hauled from each pit.
+
+
+EXP 5 
+Experiment 4: Problem Statement: 
+A civil engineer involved in construction requires 4800, 5810 and 5690 m3
+of sand, fine gravel, and coarse gravel, respectively, for a building project. There are three pits from which 
+these materials can be obtained. The composition of these pits is given below.
+      Sand % Fine Gravel % Coarse Gravel %
+Pit 1 52           30            18
+Pit 2 20           50            30
+Pit 3 25           20            55
+Develop a MATLAB code to determine the cubic meters of sand, 
+fine gravel and coarse gravel that must be hauled from each pit in order to meet the engineer’s needs using GAUSS-SIEDEL and GAUSS-JACOBI method. 
+
+The output must be in the following format
+1. Print each forward elimination step (in Augmented Matrix form)
+2. Print Result. ie. 
+______________ m^3 of sand is hauled from each pit.
+______________ m^3 of fine gravel is hauled from each pit.
+______________ m^3 of coarse gravel is hauled from each pit.
+
+
+EXP 6
+Experiment 6: Problem Statement: 
+The specific growth rate of a yeast that produces an antibiotic as a function of the food 
+concentration c,
+
+g= 2c/(4+0.8*c+c^2+0.2*c^3)
+
+Growth goes to zero at very low concentrations due to food limitation. It also goes to zero at 
+high concentrations due to toxicity effects. Find the value of “c” at which the growth is maximum.
+Write a generalized MATLAB code to find the maximum growth using Golden-section search method. 
+The output must be in the following format
+Take Xl = 0 and Xu = 5
+Print: The maximum bacterial growth is found to be _______________ at the food concentration of ______________. Number of iterations involved ______________.
+
+
+EXP 7
+Experiment 7: Problem Statement: Date: 27 February 2019
+Integration provides a means to compute how much mass enters or leaves a reactor over a 
+specified time period, as in,
+
+M= int(Qc, t, t1, t2)
+
+where t1 and t2 = the initial and final times, respectively.
+The integral represents the summation of the product of flow × concentration to give the total 
+mass entering or leaving from t1 to t2. If the flow rate is constant, Q can be moved outside the 
+integral:
+
+M= Q* int(c, t, t1, t2) 
+
+Use numerical integration to evaluate this equation for the data listed below. Note that Q = 4 m^3/min.
+
+t, min   | 00 10 20 30 40 50 60
+C, mg/m3 | 10 35 55 52 37 34 30
+
+Write a generalized MATLAB code to find the mass leaves the reactor using
+
+a) Multiple application Trapezoidal method. 
+b) Combination of Simpson’s 1/3rd and 3/8th rule.
+c) Compare the result with graphical solution.
+
+The output must be in the following format
+1. The area under the curve is _______________ and the mass leaving the reactor is ______________________. (by multiple application Trapezoidal rule).
+2. The area under the curve is _______________ and the mass leaving the reactor is ______________________. (by Simpson’s 1/3rd rule). 
+3. The area under the curve is _______________ and the mass leaving the reactor is ______________________. (by Simpson’s 3/8th rule).
+4. The area under the curve is _______________ and the mass leaving the reactor is ______________________. (by Graphical Procedure).
+
+
+EXP 8
+Experiment 8: Problem Statement: Date: 13 March 2019
+Mass balance of a single mixed flow reactor is given by the following equation.
+
+V dC/dt= Q*Cin-Q*C-K*V*C^2
+
+If Cin = 50 mg/m3, Q = 5 m^3/min, V = 100 m^3, C0 = 10 mg/m^3 and k = 0.001 m^3/mg min.
+
+Develop a MATLAB code to solve the ODE using Euler method until the concentration 
+reaches a stable level (εs = 0.01%.). Take time step size as 5 min. 
+Output Format: Stable concentration achieved at ______ min and the concentration is _____________.
+
+EXP 9 
+Experiment 8: Problem Statement: Date: 13 March 2019
+Mass balance of a single mixed flow reactor is given by the following equation.
+
+V dC/dt= Q*Cin-Q*C-K*V*C^2
+
+If Cin = 50 mg/m3, Q = 5 m^3/min, V = 100 m^3, C0 = 10 mg/m^3 and k = 0.001 m^3/mg min.
+
+Develop a MATLAB code to solve the ODE using RK 4th order method until the concentration 
+reaches a stable level (εs = 0.01%.). Take time step size as 5 min. 
+Output Format: Stable concentration achieved at ______ min and the concentration is _____________.
+
+EXP 10 
+Experiment 10: Problem Statement Date: 25 October 2019
+Write a MATLAB code to solve the given ordinary differential equation (ODE) using Euler 
+and Runge-Kutta (R-K) 4th order method and compare the results with analytical solution 
+represent the results using graph.
+The velocity of a falling parachutist is given by the following equation:
+
+where, v is velocity (m/s), t is time (s), g is the acceleration due to gravity (9.81 m/s2), c is the 
+drag coefficient (kg/s), and m is mass (kg).
+Take c = 12.5 kg/s and m = 68 kg.
+Initial Condition: At t = 0 s; v = 0 m/s. ie., v(0) = 0.
+
+Analytical Solution is given by the following equation:
+The output must be in the following format
+
+Iteration time(s)   velocity (m/s)    Euler Method
+Iteration time(s)   velocity (m/s)    R-K Method
+Iteration time(s)   velocity (m/s)    Analytical Solution
+
+Plot graph V vs. t for all the above 3 methods with varying the step size h=2, h=4, h=6, h= 8, 
+h=10. Time starts from 0 s to 60 s. 
+Required formula:
+Euler Method
+y_i_plus_1 = y_i + f(x_i, y_i) * h;
+
+Runge-Kutta (R-K) Method
+y_(i+1) = y_i + (1/6) * (k_1 + 2*k_2 + 2*k_3 + k_4) * h
+k_1 = f(x_i, y_i)
+k_2 = f(x_i + 0.5*h, y_i + 0.5*k_1*h)
+k_3 = f(x_i + 0.5*h, y_i + 0.5*k_2*h)
+k_4 = f(x_i + h, y_i + k_3*h)
+
+
