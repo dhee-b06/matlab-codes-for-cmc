@@ -2,7 +2,7 @@ EXP 5
 % DB
 
 
-function x = GEL(xyz, const)
+function x = GS(xyz, const)
     n = length(const);
     x = zeros(n, 1);     
     aug = [xyz, const];
@@ -31,7 +31,7 @@ end
 
 xyz = [52 20 25; 30 50 20; 25 20 55];
 const = [4800; 5810; 5690];
-v = GEL(xyz, const);
+v = GS(xyz, const);
 fprintf('%.8f m^3 of sand is hauled from each pit.\n', v(1));
 fprintf('%.8f m^3 of fine gravel is hauled from each pit.\n', v(2));
 fprintf('%.8f m^3 of coarse gravel is hauled from each pit.\n', v(3));
