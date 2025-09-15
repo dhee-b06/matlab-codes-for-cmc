@@ -2,41 +2,45 @@ EXP 4
 % DB
 
 
-function x= GEL (xyz, const)
+function [x, iter] = GEeL(xyz, const)
     n = length(const);
-    augmented = [xyz, const];    % combine into augmented matrix
-
+    iter = 0; % Initialize iteration counter
     disp('Initial augmented matrix:');
-    disp(augmented);
+    disp([xyz, const]);
 
     for k = 1:n-1
         for i = k+1:n
+            iter = iter + 1; % Count each elimination step
             c = xyz(i,k) / xyz(k,k);
             xyz(i,k:n) = xyz(i,k:n) - c * xyz(k,k:n);
             const(i) = const(i) - c * const(k);
-
-            augmented = [xyz, const];
-            disp(['After eliminating {R', num2str(i), ', C', num2str(k), '};']);
-            disp(augmented);
+            disp(['After eliminating R', num2str(i), ', C', num2str(k), ':']);
+            disp([xyz, const]);
         end
+        pivot = xyz(k,k);
+        xyz(k,k:n) = xyz(k,k:n) / pivot;
+        const(k) = const(k) / pivot;
     end
+
+    pivot = xyz(n,n);
+    xyz(n,n) = xyz(n,n) / pivot;
+    const(n) = const(n) / pivot;
+    disp(['To make the echelon form, we change row R', num2str(n), ':']);
+    disp([xyz, const]);
 
     x = zeros(n,1);
-    x(n) = const(n) / xyz(n,n);
-
+    x(n) = const(n);
     for i = n-1:-1:1
-        ax = 0;
-        for j = i+1:n
-            ax = ax + xyz(i,j) * x(j);
-        end
-        x(i) = (const(i) - ax) / xyz(i,i);
+        x(i) = const(i) - xyz(i,i+1:n) * x(i+1:n);
     end
 end
+
+% Example usage:
 xyz = [52 20 25; 30 50 20; 25 20 55];
 const = [4800; 5810; 5690];
-v=GEL(xyz, const)
+[v, iter] = GEeL(xyz, const);
 fprintf('%.8f m^3 of sand is hauled from each pit.\n', v(1));
 fprintf('%.8f m^3 of fine gravel is hauled from each pit.\n', v(2));
 fprintf('%.8f m^3 of coarse gravel is hauled from each pit.\n', v(3));
+fprintf('Number of iterations: %d\n', iter);
 whos
-
